@@ -1,36 +1,32 @@
 import random
 
-def get_user_choice():
-    choice = input("Enter Rock, Paper, or Scissors: ").strip().lower()
-    if choice in ['rock', 'paper', 'scissors']:
-        return choice
+options = ("rock","paper","scissors")
+running = True
+
+while running:
+    player = None
+    computer = random.choice(options)
+
+    while player not in options:
+        player = input("Enter a choice (rock,paper,scissors):")
+
+    print(f"player: {player}")
+    print(f"computer: {computer}")
+
+    if player == computer :
+        print("It's a tie!")
+    elif player == "rock" and computer == "scissors" :
+        print("you win!")
+    elif player == "paper" and computer == "rock":
+        print("you win!")
+    elif player == "scissors" and computer == "paper":
+        print("you win!")
     else:
-        print("Invalid input. Try again.")
-        return get_user_choice()
+        print("you lose!")
 
-def get_computer_choice():
-    return random.choice(['rock', 'paper', 'scissors'])
+    play_again = input("play again? (y/n):").lower()
+    if not play_again == "y":
+        running = False
 
-def determine_winner(user, computer):
-    if user == computer:
-        return "It's a tie!"
-    elif (
-        (user == 'rock' and computer == 'scissors') or
-        (user == 'paper' and computer == 'rock') or
-        (user == 'scissors' and computer == 'paper')
-    ):
-        return "You win!"
-    else:
-        return "Computer wins!"
+print ("Thanks for playing!")        
 
-def play():
-    print("=== Rock, Paper, Scissors Game ===")
-    user_choice = get_user_choice()
-    computer_choice = get_computer_choice()
-    print(f"\nYou chose: {user_choice.capitalize()}")
-    print(f"Computer chose: {computer_choice.capitalize()}")
-    result = determine_winner(user_choice, computer_choice)
-    print(f"\nResult: {result}")
-
-if __name__ == "__main__":
-    play()
